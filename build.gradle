@@ -1,0 +1,28 @@
+ext {
+    hiltAndroidVersion = '1.0.0-alpha02'
+    retrofitVersion = '2.9.0'
+    pagingVersion = '3.0.0-alpha05'
+    archLifecycleVersion = '2.2.0'
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        kotlin_version = '1.5.20'
+        hiltVersion = '2.28.3-alpha'
+        hiltAndroidVersion = '1.0.0-alpha02'
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.21"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
