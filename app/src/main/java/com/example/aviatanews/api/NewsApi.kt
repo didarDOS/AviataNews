@@ -14,6 +14,10 @@ interface NewsApi {
         @QueryMap request: Map<String, String>
     ): News
 
+    @GET("v2/top-headlines?apiKey=$API_KEY")
+    fun loadHeadlines(
+        @QueryMap request: Map<String, String>
+    ): News
 
 
 

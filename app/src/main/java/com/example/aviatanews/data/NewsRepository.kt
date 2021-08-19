@@ -12,10 +12,20 @@ class NewsRepository @Inject constructor(private val newsApi: NewsApi) {
     fun  getNews() =
         Pager(
             config = PagingConfig(
-                pageSize = 5,
+                pageSize = 15,
                 maxSize = 20,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {NewsPagingSource(newsApi, null)}
         ).liveData
+
+    fun getHeadlines() =
+        Pager(
+            config = PagingConfig(
+                pageSize = 15,
+                maxSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {NewsPagingSource(newsApi, null)}
+        )
 }

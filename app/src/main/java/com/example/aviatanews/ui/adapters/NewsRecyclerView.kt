@@ -22,15 +22,19 @@ class NewsRecyclerView() : PagingDataAdapter<News.Article, NewsRecyclerView.View
 
 
     inner class ViewHolder(private val binding: NewsItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root){
+
+        fun bind(news: News.Article){
+
+        }
+
+        }
 
     companion object {
         private val DIFF_CALLBACK = object :
             DiffUtil.ItemCallback<News.Article>() {
             override fun areItemsTheSame(oldItem: News.Article, newItem: News.Article): Boolean
                 = oldItem.content == newItem.content
-
-
             override fun areContentsTheSame(oldItem: News.Article, newItem: News.Article): Boolean
                 = oldItem == newItem
         }
