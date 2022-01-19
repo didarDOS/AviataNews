@@ -1,8 +1,15 @@
 package com.example.aviatanews
 
 import android.app.Application
-import dagger.hilt.android.HiltAndroidApp
+import com.example.aviatanews.di.DaggerAppComponent
 
-@HiltAndroidApp
-class NewsApplication: Application() {
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+
+class NewsApplication: DaggerApplication() {
+    private val appComponent = DaggerAppComponent.builder().application(this).build()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        appComponent.inject(this)
+        return appComponent
+    }
 }

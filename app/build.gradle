@@ -2,13 +2,10 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlin-parcelize'
+    id 'kotlin-android-extensions'
+    id 'androidx.navigation.safeargs.kotlin'
+//    id 'kotlin-parcelize'
 
-}
-
-ext {
-    hiltAndroidXVersion = '1.0.0'
 }
 
 android {
@@ -16,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.aviatanews"
-        minSdk 21
+        minSdk 28
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -41,12 +38,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
+
 }
 
 dependencies {
+    versions.dagger = "2.40.5"
+    versions.support = "1.0.0"
+    versions.nav = "2.3.5"
+    versions.room = "2.2.0"
+    versions.mockwebserver = "3.8.1"
+    versions.mockito = "2.7.19"
+    versions.mockito_all = "1.10.19"
+    versions.lifecycle = "2.0.0"
+    versions.hamcrest = "1.3"
+    versions.glide = "4.11.0"
+    versions.arch_core = "1.1.1"
+    versions.googleplay = "16.0.0"
+    versions.paging = "3.1.0"
+    versions.retrofit = "2.9.0"
+    versions.glide = "4.11.0"
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
@@ -57,26 +67,26 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha03'
 
-    // Dagger Hilt
-    implementation "com.google.dagger:hilt-android:$hiltVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
-
+    // Dependency Injection - Dagger2
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    compileOnly 'javax.annotation:jsr250-api:1.0'
 
     // Retrofit + GSON
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
 
     // Paging 3
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
-    testImplementation "androidx.paging:paging-common-ktx:$pagingVersion"
-
-    // Lifecycle components
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-
+    implementation "androidx.paging:paging-runtime-ktx:$versions.paging"
+    testImplementation "androidx.paging:paging-common-ktx:$versions.paging"
 
     implementation "androidx.room:room-runtime:2.3.0"
     kapt  "androidx.room:room-compiler:2.3.0"
@@ -84,8 +94,16 @@ dependencies {
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1"
-
     // Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.nav"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.nav"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    // SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+
 }

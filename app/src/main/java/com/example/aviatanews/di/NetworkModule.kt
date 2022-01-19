@@ -1,13 +1,11 @@
 package com.example.aviatanews.di
 
+import com.example.aviatanews.Constants
 import com.example.aviatanews.api.NewsApi
-import com.example.aviatanews.data.NewsRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -15,16 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
+
 @Module
 object NetworkModule {
 
-    private const val BASE_URL = "https://newsapi.org/"
 
-    @Provides
-    fun providesBaseUrl(): String {
-        return BASE_URL
-    }
     @Provides
     @Singleton
     fun provideNewsApi(retrofit: Retrofit): NewsApi =
@@ -65,13 +58,12 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        baseUrl: String,
         client: OkHttpClient,
         gson: Gson
     ): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(client)
-        .baseUrl(baseUrl)
+        .baseUrl(Constants.SERVICE_BASE_URL)
         .build()
 
 }
